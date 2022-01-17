@@ -1,0 +1,63 @@
+plugins {
+  id 'java-gradle-plugin'
+  id 'maven-publish'
+  id 'com.gradle.plugin-publish' version '0.16.0'
+}
+
+project.ext.set("local_test", false)
+apply from: rootProject.file("config.gradle")
+
+repositories {
+  maven {
+    url "https://plugins.gradle.org/m2/"
+  }
+
+  mavenLocal()
+  mavenCentral()
+}
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+}
+
+group = plugin_group
+archivesBaseName = plugin_name
+version = plugin_version
+
+pluginBundle {
+  website = plugin_website
+  vcsUrl = plugin_vcsUrl
+  description = plugin_desc
+  tags = plugin_tags
+}
+
+gradlePlugin {
+  plugins {
+    "${archivesBaseName}" {
+      id = "${group}.${archivesBaseName}"
+      displayName = "${archivesBaseName}"
+      implementationClass = "${group}.${archivesBaseName}"
+    }
+  }
+}
+
+
+publishing {
+  repositories {
+    maven {
+      name = plugin_name
+      url = local_maven
+    }
+  }
+}
+
+
+tasks.withType(JavaCompile) {
+  options.compilerArgs << '-Xlint:unchecked'
+  options.deprecation = true
+}
+
+wrapper {
+  gradleVersion = '7.3.3'
+}
