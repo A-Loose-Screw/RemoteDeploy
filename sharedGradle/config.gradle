@@ -11,10 +11,12 @@ project.ext.set("plugin_desc", "Plugin to deploy binary and file artifacts remot
 project.ext.set("plugin_tags", ["Deploy", "Remote", "Native", "C++", "Target", "Java"])
 
 // 
-// Location
+// Locations
 // 
 if (local_test) {
   project.ext.set("local_maven", "${rootProject.buildDir}../build/repo")
 } else {
   project.ext.set("local_maven", "${rootProject.buildDir}/repo")
 }
+
+project.ext.set("shared_gradle", "${rootDir}/sharedGradle")

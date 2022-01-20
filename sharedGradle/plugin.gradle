@@ -1,0 +1,30 @@
+group = plugin_group
+archivesBaseName = plugin_name
+version = plugin_version
+
+pluginBundle {
+  website = plugin_website
+  vcsUrl = plugin_vcsUrl
+  description = plugin_desc
+  tags = plugin_tags
+}
+
+gradlePlugin {
+  plugins {
+    "${archivesBaseName}" {
+      id = "${group}.${archivesBaseName}"
+      displayName = "${archivesBaseName}"
+      implementationClass = "${group}.${archivesBaseName}"
+    }
+  }
+}
+
+
+publishing {
+  repositories {
+    maven {
+      name = plugin_name
+      url = local_maven
+    }
+  }
+}

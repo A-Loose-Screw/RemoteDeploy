@@ -3,4 +3,4 @@ plugins {
 }
 
 project.ext.set("local_test", true)
-apply from: rootProject.file("../config.gradle")
+apply from: rootProject.file("../sharedGradle/config.gradle")

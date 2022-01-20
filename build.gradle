@@ -4,8 +4,6 @@ plugins {
   id 'com.gradle.plugin-publish' version '0.16.0'
 }
 
-project.ext.set("local_test", false)
-apply from: rootProject.file("config.gradle")
 
 repositories {
   maven {
@@ -16,47 +14,9 @@ repositories {
   mavenCentral()
 }
 
-java {
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
-}
-
-group = plugin_group
-archivesBaseName = plugin_name
-version = plugin_version
-
-pluginBundle {
-  website = plugin_website
-  vcsUrl = plugin_vcsUrl
-  description = plugin_desc
-  tags = plugin_tags
-}
-
-gradlePlugin {
-  plugins {
-    "${archivesBaseName}" {
-      id = "${group}.${archivesBaseName}"
-      displayName = "${archivesBaseName}"
-      implementationClass = "${group}.${archivesBaseName}"
-    }
-  }
-}
-
-
-publishing {
-  repositories {
-    maven {
-      name = plugin_name
-      url = local_maven
-    }
-  }
-}
-
-
-tasks.withType(JavaCompile) {
-  options.compilerArgs << '-Xlint:unchecked'
-  options.deprecation = true
-}
+project.ext.set("local_test", false)
+apply from: rootProject.file("sharedGradle/config.gradle")
+apply from: rootProject.file("sharedGradle/mainBuild.gradle")
 
 wrapper {
   gradleVersion = '7.3.3'
