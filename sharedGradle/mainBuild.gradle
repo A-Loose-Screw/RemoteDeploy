@@ -4,14 +4,6 @@ java {
 }
 
 dependencies {
-  // compile 'ch.qos.logback:logback-classic:1.2.3'
-  implementation group: 'ch.qos.logback', name: 'logback', version: '0.+'
-  implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.+'
-  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
-  implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.+'
-
-  // implementation group: 'ch.qos.logback', name: 'logback-access', version: '1.+'
-  // implementation 'ch.qos.logback:logback-classic:1.2.9'
 }
 
 sourceSets {
