@@ -1,0 +1,13 @@
+pluginManagement {
+  repositories {
+    maven {
+      url "../build/repo"
+    }
+
+    gradlePluginPortal()
+    mavenLocal()
+    mavenCentral()
+  }
+}
+
+rootProject.name = '_localtest'
