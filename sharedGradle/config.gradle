@@ -1,0 +1,23 @@
+
+// 
+// Variables
+// 
+project.ext.set("plugin_version", "1.0.0") // Semantic (major.minor.patch)
+project.ext.set("plugin_group", "a.loose.screw")
+project.ext.set("plugin_name", "RemoteDeploy")
+
+project.ext.set("plugin_website", "https://github.com/A-Loose-Screw/RemoteDeploy")
+project.ext.set("plugin_vcsUrl", "${plugin_website}")
+project.ext.set("plugin_desc", "Plugin to deploy binary and file artifacts remotely to targets")
+project.ext.set("plugin_tags", ["Deploy", "Remote", "Native", "C++", "Target", "Java"])
+
+// 
+// Locations
+// 
+if (local_test) {
+  project.ext.set("local_maven", "${rootProject.buildDir}../build/repo")
+} else {
+  project.ext.set("local_maven", "${rootProject.buildDir}/repo")
+}
+
+project.ext.set("shared_gradle", "${rootDir}/sharedGradle")

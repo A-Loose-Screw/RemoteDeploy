@@ -1,0 +1,26 @@
+java {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+}
+
+dependencies {
+}
+
+sourceSets {
+  main {
+    java {
+      // srcDirs = ['src/main']
+    }
+
+    resources {
+      srcDirs = ['src/main/resources']
+    }
+  }
+}
+
+tasks.withType(JavaCompile) {
+  options.compilerArgs << '-Xlint:unchecked'
+  options.deprecation = true
+}
+
+apply from: "${shared_gradle}/plugin.gradle"
