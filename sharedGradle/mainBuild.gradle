@@ -1,27 +1,25 @@
-// java {
-//   sourceCompatibility = JavaVersion.VERSION_11
-//   targetCompatibility = JavaVersion.VERSION_11
-// }
+java {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+}
 
-// dependencies {
-//   api 'com.jcraft:jsch:0.1.55'
-// }
+dependencies {
+  api 'com.jcraft:jsch:0.1.55'
+}
 
-// sourceSets {
-//   main {
-//     java {
-//       srcDirs = ['src/main']
-//     }
+sourceSets {
+  main {
+    // java {
+    //   srcDirs = ['src/main/java']
+    // }
 
-//     resources {
-//       srcDirs = ['src/main/resources']
-//     }
-//   }
-// }
+    resources {
+      srcDirs = ['src/main/resources']
+    }
+  }
+}
 
-// tasks.withType(JavaCompile) {
-//   options.compilerArgs << '-Xlint:unchecked'
-//   options.deprecation = true
-// }
-
-// apply from: "${shared_gradle}/plugin.gradle"
+tasks.withType(JavaCompile) {
+  options.compilerArgs << '-Xlint:unchecked'
+  options.deprecation = true
+}

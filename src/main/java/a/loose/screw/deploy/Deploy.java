@@ -1,15 +1,16 @@
 package a.loose.screw.deploy;
 
-import java.nio.channels.Channel;
-
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+
+import groovy.transform.Internal;
+
 import com.jcraft.jsch.ChannelSftp;
 
 import org.gradle.api.DefaultTask;
-import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.Input;
 
-public class DeployTask extends DefaultTask {
+public class Deploy extends DefaultTask {
   private String host;
   private String username;
   private String password;
@@ -33,6 +34,11 @@ public class DeployTask extends DefaultTask {
 
   public void setHost(String host) {
     this.host = host;
+  }
+
+  @Input
+  public String getHost() {
+    return this.host;
   }
 
   public void setUsername(String user) {

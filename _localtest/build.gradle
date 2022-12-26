@@ -8,5 +8,11 @@ plugins {
   id 'a.loose.screw.RemoteDeploy' version '1.0.0'
 }
 
+deploy {
+  target("Hello") {
+    host = "myhost"
+  }
+}
+
 project.ext.set("local_test", true)
 apply from: rootProject.file("../sharedGradle/config.gradle")

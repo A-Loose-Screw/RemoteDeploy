@@ -16,33 +16,8 @@ repositories {
 
 project.ext.set("local_test", false)
 apply from: rootProject.file("sharedGradle/config.gradle")
-java {
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
-}
-
-dependencies {
-  api 'com.jcraft:jsch:0.1.55'
-}
-
-sourceSets {
-  main {
-    // java {
-    //   srcDirs = ['src/main/java']
-    // }
-
-    resources {
-      srcDirs = ['src/main/resources']
-    }
-  }
-}
-
-tasks.withType(JavaCompile) {
-  options.compilerArgs << '-Xlint:unchecked'
-  options.deprecation = true
-}
-
-apply from: "${shared_gradle}/plugin.gradle"
+apply from: rootProject.file("sharedGradle/mainBuild.gradle")
+apply from: rootProject.file("sharedGradle/plugin.gradle")
 
 wrapper {
   gradleVersion = '7.4.2'
