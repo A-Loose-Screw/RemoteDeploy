@@ -15,7 +15,7 @@ public class DeployPlugin implements Plugin<Project> {
     RDLoggerFactory.getInstance().setColourOutput(project);
     this._logger = RDLoggerFactory.getInstance().create("RemoteDeploy");
 
-    DeployExtension deployExtension = project.getExtensions().create("deploy", DeployExtension.class, project, this._logger);
+    DeployExtension deployExtension = project.getExtensions().create("deploy", DeployExtension.class, project);
 
     project.getTasks().register("deploy", Deploy.class, deploy -> {
       // this._logger.log(project.getExtensions().getByType(DeployExtension.class).getTarget().host);

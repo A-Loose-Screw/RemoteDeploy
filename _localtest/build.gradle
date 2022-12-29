@@ -12,11 +12,11 @@ deploy {
 
   targets {
     target("Levi1") {
-      host = "myhost"
+      host = "192.168.0.1"
     }
 
     target("Levi2") {
-      // host = "myhost"
+      host = "192.168.0.2"
     }
   }
 }
