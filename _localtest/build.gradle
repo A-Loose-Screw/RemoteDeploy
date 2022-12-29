@@ -9,8 +9,15 @@ plugins {
 }
 
 deploy {
-  target("Hello") {
-    host = "myhost"
+
+  targets {
+    target("Levi1") {
+      host = "myhost"
+    }
+
+    target("Levi2") {
+      // host = "myhost"
+    }
   }
 }
 
