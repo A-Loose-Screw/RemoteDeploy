@@ -9,7 +9,7 @@ plugins {
 }
 
 deploy {
-  targets {
+  remotes {
     target("Levi1") {
       host = "192.168.0.1"
     }
@@ -17,6 +17,10 @@ deploy {
     target("Levi2") {
       host = "192.168.0.2"
     }
+  }
+
+  components {
+
   }
 }
 

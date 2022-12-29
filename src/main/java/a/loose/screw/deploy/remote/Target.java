@@ -1,4 +1,4 @@
-package a.loose.screw.deploy.target;
+package a.loose.screw.deploy.remote;
 
 import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.Project;
@@ -20,14 +20,12 @@ public class Target implements Named {
     this._name = name;
     this._project = project;
     this._logger = RDLoggerFactory.getInstance().create("Target");
-    this._logger.log(this._name + " created");
   }
 
   @Override
   public String getName() {
     return _name;
   }
-
 
   public String host;
 
