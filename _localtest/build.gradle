@@ -11,16 +11,24 @@ plugins {
 deploy {
   remotes {
     target("Levi1") {
-      host = "192.168.0.1"
+      // host = "192.168.0.1"
+
+      locations {
+        // host = "192.168.0.1"
+      }
     }
 
     target("Levi2") {
-      host = "192.168.0.2"
+      // host = "192.168.0.2"
+
+      // locations {
+
+      // }
     }
-  }
+  } 
 
   components {
-
+    
   }
 }
 

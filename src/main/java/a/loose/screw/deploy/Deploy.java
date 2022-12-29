@@ -3,8 +3,6 @@ package a.loose.screw.deploy;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
-import groovy.transform.Internal;
-
 import com.jcraft.jsch.ChannelSftp;
 
 import org.gradle.api.DefaultTask;

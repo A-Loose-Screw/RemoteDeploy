@@ -19,7 +19,7 @@ public class DeployPlugin implements Plugin<Project> {
 
     project.getTasks().register("deploy", Deploy.class, deploy -> {
       project.getExtensions().getByType(DeployExtension.class).getRemoteExtension().getTargets().forEach(target -> {
-        this._logger.log("Deploying " + target.getName() + " -> " + target.host);
+        this._logger.log("Deploying " + target.getName());
       });
     });
   }
