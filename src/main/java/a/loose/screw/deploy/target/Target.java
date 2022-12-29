@@ -20,7 +20,7 @@ public class Target implements Named {
     this._name = name;
     this._project = project;
     this._logger = RDLoggerFactory.getInstance().create("Target");
-    this._logger.log("Target created");
+    this._logger.log(this._name + " created");
   }
 
   @Override
