@@ -16,12 +16,10 @@ deploy {
       directory = "/robot"
       timeout = 3
 
-      locations {
-        ssh {
-          host = "192.168.0.1"
-          user = "CJ"
-          pass = "password"
-        }
+      ssh {
+        address = "192.168.0.1"
+        user = "cj"
+        password = "password"
       }
     }
   } 

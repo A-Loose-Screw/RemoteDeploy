@@ -3,29 +3,35 @@ package a.loose.screw.deploy.remote;
 import org.gradle.api.Action;
 import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.Project;
+import org.gradle.api.internal.DefaultNamedDomainObjectSet;
+import org.gradle.internal.reflect.DirectInstantiator;
 
 import a.loose.screw.logging.RDLogger;
 import a.loose.screw.logging.RDLoggerFactory;
 
-public class RemoteExtension {
+public class RemoteExtension extends DefaultNamedDomainObjectSet<Target> {
   private Project _project;
-  private NamedDomainObjectContainer<Target> _targets;
   private RDLogger _logger;
 
   public RemoteExtension(Project project) {
+    // super(Target, DirectInstantiator.INSTANCE);
+    super(Target.class, DirectInstantiator.INSTANCE, null);
     this._project = project;
     this._logger = RDLoggerFactory.getInstance().create("Remotes");
-    this._targets = project.container(Target.class);
   }
 
-  public Target target(String name, final Action<? super Target> config) {
-    Target target = _targets.create(name);
+  public Target target(String name, Class<? extends Target> type, final Action<? super Target> config) {
+    Target target = this._project.getObjects().newInstance(type, name, this._project);
     config.execute(target);
-    this._targets.add(target);
+    super.add(target);
     return target;
   }
 
-  public NamedDomainObjectContainer<Target> getTargets() {
-    return this._targets;
+  public Target target(String name, final Action<? super Target> config) {
+    return target(name, Target.class, config);
+  }
+
+  public DefaultNamedDomainObjectSet<Target> getTargets() {
+    return this;
   }
 }
