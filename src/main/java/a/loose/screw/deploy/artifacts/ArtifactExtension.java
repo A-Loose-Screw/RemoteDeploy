@@ -1,15 +1,15 @@
-package a.loose.screw.deploy.component;
+package a.loose.screw.deploy.artifacts;
 
 import org.gradle.api.Project;
 
 import a.loose.screw.logging.RDLogger;
 import a.loose.screw.logging.RDLoggerFactory;
 
-public class ComponentExtension {
+public class ArtifactExtension {
   private Project _project;
   private RDLogger _logger;
 
-  public ComponentExtension(Project project) {
+  public ArtifactExtension(Project project) {
     this._project = project;
     this._logger = RDLoggerFactory.getInstance().create("Components");
   }

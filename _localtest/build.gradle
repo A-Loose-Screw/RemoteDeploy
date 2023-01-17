@@ -16,15 +16,18 @@ deploy {
       directory = "/robot"
       timeout = 3
 
-      ssh {
-        address = "192.168.0.1"
-        user = "cj"
-        password = "password"
+      locations {
+        ssh {
+          address = "192.168.0.1"
+          user = "cj"
+          password = "password"
+        }
+
       }
     }
-  } 
+  }
 
-  components {
+  artifacts {
     
   }
 }

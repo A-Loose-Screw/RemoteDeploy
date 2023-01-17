@@ -1,8 +1,10 @@
 package a.loose.screw.deploy.remote;
 
 import org.gradle.api.Project;
+import org.gradle.api.internal.DefaultDomainObjectCollection;
 
 import a.loose.screw.deploy.remote.locations.Location;
+import a.loose.screw.deploy.remote.locations.Locations;
 import a.loose.screw.deploy.remote.locations.SshLocation;
 import a.loose.screw.logging.RDLogger;
 import a.loose.screw.logging.RDLoggerFactory;
@@ -11,15 +13,13 @@ import javax.inject.Inject;
 
 import org.gradle.api.Action;
 import org.gradle.api.Named;
-import org.gradle.api.NamedDomainObjectContainer;
 
 public class Target implements Named {
   private String _name;
   private Project _project;
   private RDLogger _logger;
-  
-  // Locations
-  private NamedDomainObjectContainer<SshLocation> _sshLocation;
+
+  private Locations _locations;
 
   @Inject
   public Target(String name, Project project) {
@@ -27,7 +27,7 @@ public class Target implements Named {
     this._project = project;
     this._logger = RDLoggerFactory.getInstance().create(name + "Target");
 
-    this._sshLocation = this._project.container(SshLocation.class);
+    this._locations = project.getObjects().newInstance(Locations.class, "locations", project);
   }
 
   public String directory = "";
@@ -45,16 +45,9 @@ public class Target implements Named {
   public Integer getTimeout() {
     return timeout;
   }
-  
-  public SshLocation ssh(String name, final Action<? super SshLocation> config) {
-    SshLocation location = this._sshLocation.create(name);
-    config.execute(location);
-    this._sshLocation.add(location);
-    return location;
-  }
 
-  public SshLocation ssh(final Action<? super SshLocation> config) {
-    return ssh(this._name, config);
+  public void locations(final Action<? super Locations> config) {
+    config.execute(this._locations);
   }
 
 }
