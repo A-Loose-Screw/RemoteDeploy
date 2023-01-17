@@ -73,7 +73,7 @@ public class RDLogger {
     }
   }
 
-  public void info (String msg) {
+  public void info(String msg) {
     _logger.info(msg);
   }
 

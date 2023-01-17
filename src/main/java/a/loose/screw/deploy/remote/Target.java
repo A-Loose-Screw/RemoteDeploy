@@ -50,4 +50,7 @@ public class Target implements Named {
     config.execute(this._locations);
   }
 
+  public Locations getLocations() {
+    return this._locations;
+  }
 }

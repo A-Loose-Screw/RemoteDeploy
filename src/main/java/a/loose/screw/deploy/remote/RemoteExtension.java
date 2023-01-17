@@ -1,7 +1,6 @@
 package a.loose.screw.deploy.remote;
 
 import org.gradle.api.Action;
-import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.Project;
 import org.gradle.api.internal.DefaultNamedDomainObjectSet;
 import org.gradle.internal.reflect.DirectInstantiator;

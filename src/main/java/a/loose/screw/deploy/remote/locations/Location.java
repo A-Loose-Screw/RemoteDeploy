@@ -1,19 +1,17 @@
 package a.loose.screw.deploy.remote.locations;
 
-import javax.inject.Inject;
+import java.io.File;
+import java.util.Map;
+import java.util.Set;
 
-import org.gradle.api.Action;
 import org.gradle.api.Named;
-import org.gradle.api.NamedDomainObjectContainer;
-import org.gradle.api.Project;
 
-import a.loose.screw.logging.RDLogger;
-import a.loose.screw.logging.RDLoggerFactory;
-
-/**
- * Abstract Location used by artifacts. 
- * Specific location functions overridden by super classes
- */
 public interface Location extends Named {
-  public void deploy(String src, String dst) throws Exception;
+  // public void put(Map<String, File> files) throws Exception;
+  // public void put(Set<File> files) throws Exception;
+  public void put(File src, String dst) throws Exception;
+
+  public void connect() throws Exception;
+  public void disconnect() throws Exception;
+  // public void command(String cmd) throws Exception;
 }

@@ -18,7 +18,7 @@ deploy {
 
       locations {
         ssh {
-          address = "192.168.0.1"
+          address = "127.0.0.1"
           user = "cj"
           password = "password"
         }
@@ -28,7 +28,14 @@ deploy {
   }
 
   artifacts {
-    
+    // all {
+    //   directory = "mydir"
+    //   targets << 'Levi'
+    // }
+
+    // fileTreeArtifact {
+      
+    // }
   }
 }
 
