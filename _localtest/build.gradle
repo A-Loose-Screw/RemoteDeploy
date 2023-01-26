@@ -13,7 +13,7 @@ deploy {
     target("Levi") {
 
       // General config
-      directory = "/robot"
+      directory = "~/Desktop"
       timeout = 3
 
       locations {
@@ -21,6 +21,7 @@ deploy {
           address = "127.0.0.1"
           user = "cj"
           password = "password"
+          port = 3022
         }
 
       }

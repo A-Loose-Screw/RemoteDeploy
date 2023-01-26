@@ -8,9 +8,11 @@ import org.gradle.api.Project;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpATTRS;
 
 import a.loose.screw.logging.RDLogger;
 import a.loose.screw.logging.RDLoggerFactory;
+import groovyjarjarantlr4.v4.parse.GrammarTreeVisitor.channelSpec_return;
 
 /**
  * SSH Location for location type (address, )
@@ -40,7 +42,7 @@ public class SshLocation implements Location {
     this._logger.success("Connecting -> " + this.address);
     try {
       JSch jsch = new JSch();
-      this._session = jsch.getSession(this.user, this.address, 22);
+      this._session = jsch.getSession(this.user, this.address, this.port);
       this._session.setPassword(this.password);
       this._session.setConfig("StrictHostKeyChecking", "no");
       this._session.connect(5000);
@@ -48,7 +50,6 @@ public class SshLocation implements Location {
       ChannelSftp channel = (ChannelSftp)this._session.openChannel("sftp");
       this._channel = channel;
       this._channel.connect(5000);
-
     } catch (Exception e) {
       this._logger.errorHead("Connection Error");
       throw e;
@@ -57,6 +58,7 @@ public class SshLocation implements Location {
 
   @Override
   public void disconnect() {
+    // this._logger.rmIndent();
     try {
       this._channel.disconnect();
     } catch (Exception e) {
@@ -73,21 +75,47 @@ public class SshLocation implements Location {
   }
 
   @Override
+  public boolean discover(String dst) throws Exception {
+    SftpATTRS attrs = null;
+
+    try {
+      attrs = this._channel.stat(dst);
+    } catch (Exception e) {
+      this._logger.debug(e.toString());
+    }
+
+    if (attrs != null) {
+      return true;
+    } else {
+      try {
+        this._channel.mkdir(dst);
+        return true;
+      } catch (Exception e) {
+        this._logger.errorHead("Could not create: " + dst);
+        return false;
+      }
+    }
+  }
+
+  @Override
   public void put(File src, String dst) throws Exception {
     try {
       if (this._channel.isConnected() && src.exists()) {
-        this._logger.log(src.getName() + " -> " + dst);
-        this._channel.put(src.getPath(), dst);
+        if (discover(dst)) {
+          this._channel.put(src.getPath(), dst);
+        }
       } else {
-        this._logger.error("Could not send " + src.getName());
+        this._logger.error("Could not find " + src.getPath());
       }
     } catch (Exception e) {
       this._logger.errorHead("File Send Error");
       throw e;
     }
+    this._logger.log("cp-> [" + src.getName() + " -> " + dst + "]");
   }
 
   public String address = "";
   public String user = "";
   public String password = "";
+  public int port = 22;
 }

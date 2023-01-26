@@ -26,9 +26,9 @@ public class DeployPlugin implements Plugin<Project> {
           try {
             location.connect();
 
-            File file = new File("~/Desktop/code/RemoteDeploy/test.md");
-            System.out.println(file.canRead());
-            location.put(file, "mydir/");
+            File file = new File("/home/cj/Desktop/code/RemoteDeploy/test.md");
+            location.put(file, "Desktop/temp/");
+            location.disconnect();
           } catch (Exception e) {
             this._logger.error(e.getMessage());
           }

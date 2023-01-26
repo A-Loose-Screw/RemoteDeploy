@@ -10,6 +10,7 @@ public interface Location extends Named {
   // public void put(Map<String, File> files) throws Exception;
   // public void put(Set<File> files) throws Exception;
   public void put(File src, String dst) throws Exception;
+  public boolean discover(String dst) throws Exception;
 
   public void connect() throws Exception;
   public void disconnect() throws Exception;
