@@ -25,14 +25,12 @@ public class DeployPlugin implements Plugin<Project> {
 
       deployExtension.getRemoteExtension().getTargets().forEach(target -> {
         this._logger.log("Deploying " + target.getName());
-       
-        deployExtension.getArtifactExtension().getArtifacts().forEach(artifact -> {
-          try {
-            deploy.deploy(target, artifact);
-          } catch (Exception e) {
-            this._logger.error(e.getMessage());
-          }
-        });
+        try {
+          deploy.deploy(target, deployExtension.getArtifactExtension().getArtifacts());
+        } catch (Exception e) {
+          this._logger.errorHead("Could not deploy to `" + target.getName() + "`");
+          this._logger.error(e.getMessage());
+        }
       });
     });
   }

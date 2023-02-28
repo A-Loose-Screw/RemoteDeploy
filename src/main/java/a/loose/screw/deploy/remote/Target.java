@@ -39,7 +39,7 @@ public class Target implements Named {
     config.execute(this._locations);
   }
 
-  public Locations getLocations() {
+  public Locations getLocationsExtension() {
     return this._locations;
   }
 }

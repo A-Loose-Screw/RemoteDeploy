@@ -1,5 +1,8 @@
 package a.loose.screw.deploy.artifacts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.gradle.api.Named;
 import org.gradle.api.Project;
 
@@ -18,7 +21,7 @@ public abstract class Artifact implements Named {
   }
 
   public String directory = "";
-  public String[] targets = {};
+  public List<String> targets = new ArrayList<String>();
 
   public String[] preDeploy = {};
   public String[] postDeploy = {};
@@ -27,7 +30,7 @@ public abstract class Artifact implements Named {
 
   public abstract void artifactDeploy(Location location, String path) throws Exception;
 
-  public void deploy(Target target) throws Exception {
+  public void deploy(Target target, Location location) throws Exception {
     if (disabled) return;
 
     // Fix up pathing
@@ -40,24 +43,15 @@ public abstract class Artifact implements Named {
 
     String localDir = this.directory;
     if (localDir.length() > 0) {
-      if (localDir.substring(localDir.length()-1) == "/" || localDir.substring(localDir.length()-1) == "\\") {
-        localDir = localDir.substring(0, localDir.length()-2);
+      if (localDir.substring(0) == "/" || localDir.substring(0) == "\\") {
+        localDir = localDir.substring(1, localDir.length()-1);
       }
     }
 
     String path = rootDir + "/" + localDir;
 
     try {
-      target.getLocations().getLocations().forEach(location -> {
-        try {
-          location.connect();
-          artifactDeploy(location, path);
-          location.disconnect();
-        } catch (Exception e) {
-          this._logger.errorHead("Artifact Deploy Error");
-          this._logger.error(e.getMessage());
-        }
-      });
+      artifactDeploy(location, path);
     } catch (Exception e) {
       throw e;
     }

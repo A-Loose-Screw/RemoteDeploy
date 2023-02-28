@@ -38,8 +38,15 @@ deploy {
       
     // }
 
-    fileArtifact('myFileArtifact') {
-      directory = "myArtifactDir"
+    fileArtifact('myFileArtifact1') {
+      targets << "Levi"
+      directory = "myArtifactDir1"
+      file = file("/home/cj/Desktop/code/RemoteDeploy/test.md")
+    }
+
+    fileArtifact('myFileArtifact2') {
+      targets << "Levi"
+      directory = "myArtifactDir2"
       file = file("/home/cj/Desktop/code/RemoteDeploy/test.md")
     }
   }

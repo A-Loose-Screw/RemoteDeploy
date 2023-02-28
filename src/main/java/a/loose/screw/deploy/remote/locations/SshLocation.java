@@ -61,6 +61,7 @@ public class SshLocation implements Location {
 
   @Override
   public void disconnect() {
+    this._logger.warn("Disconnecting -> " + this.address);
     try {
       this._channel.disconnect();
     } catch (Exception e) {
