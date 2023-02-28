@@ -3,6 +3,8 @@ package a.loose.screw.deploy.remote.locations;
 import java.io.File;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import org.gradle.api.Project;
 
 import com.jcraft.jsch.ChannelSftp;
@@ -26,6 +28,7 @@ public class SshLocation implements Location {
   private Session _session;
   private ChannelSftp _channel;
 
+  @Inject
   public SshLocation(String name, Project project) {
     this._project = project;
     this._name = name;
@@ -58,7 +61,6 @@ public class SshLocation implements Location {
 
   @Override
   public void disconnect() {
-    // this._logger.rmIndent();
     try {
       this._channel.disconnect();
     } catch (Exception e) {
@@ -111,7 +113,7 @@ public class SshLocation implements Location {
       this._logger.errorHead("File Send Error");
       throw e;
     }
-    this._logger.log("cp-> [" + src.getName() + " -> " + dst + "]");
+    this._logger.log("cp -> [" + src.getName() + " -> " + dst + "]");
   }
 
   public String address = "";

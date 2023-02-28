@@ -13,15 +13,15 @@ deploy {
     target("Levi") {
 
       // General config
-      directory = "~/Desktop"
+      rootDirectory = "myDir"
       timeout = 3
 
       locations {
         ssh {
-          address = "127.0.0.1"
-          user = "cj"
-          password = "password"
-          port = 3022
+          address = "192.168.178.10"
+          user = "levi"
+          password = "levi"
+          port = 22
         }
 
       }
@@ -37,6 +37,11 @@ deploy {
     // fileTreeArtifact {
       
     // }
+
+    fileArtifact('myFileArtifact') {
+      directory = "myArtifactDir"
+      file = file("/home/cj/Desktop/code/RemoteDeploy/test.md")
+    }
   }
 }
 

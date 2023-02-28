@@ -11,19 +11,19 @@ public class Locations {
   private Project _project;
 
   // Locations
-  private NamedDomainObjectContainer<SshLocation> _sshLocations;
+  private NamedDomainObjectContainer<Location> _locations;
 
   @Inject
   public Locations(String name, Project project) {
     this._project = project;
     this._name = name;
-    this._sshLocations = project.container(SshLocation.class);
+    this._locations = project.container(Location.class);
   }
 
   public SshLocation ssh(String name, final Action<? super SshLocation> config) {
-    SshLocation location = this._sshLocations.create(name);
+    SshLocation location = this._project.getObjects().newInstance(SshLocation.class, name);
     config.execute(location);
-    this._sshLocations.add(location);
+    this._locations.add(location);
     return location;
   }
 
@@ -31,7 +31,7 @@ public class Locations {
     return ssh(this._name, config);
   }
 
-  public NamedDomainObjectContainer<SshLocation> getSshLocations() {
-    return this._sshLocations;
+  public NamedDomainObjectContainer<Location> getLocations() {
+    return this._locations;
   }
 }

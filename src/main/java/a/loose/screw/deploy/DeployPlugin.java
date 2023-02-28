@@ -19,20 +19,19 @@ public class DeployPlugin implements Plugin<Project> {
 
     DeployExtension deployExtension = project.getExtensions().create("deploy", DeployExtension.class, project);
 
-    project.getTasks().register("deploy", Deploy.class, deploy -> {
-      project.getExtensions().getByType(DeployExtension.class).getRemoteExtension().getTargets().forEach(target -> {
-        this._logger.log("Deploying " + target.getName());
-        target.getLocations().getSshLocations().forEach(location -> {
-          try {
-            location.connect();
 
-            File file = new File("/home/cj/Desktop/code/RemoteDeploy/test.md");
-            location.put(file, "Desktop/temp/");
-            location.disconnect();
+    // Deploy task
+    project.getTasks().register("deploy", Deploy.class, deploy -> {
+
+      deployExtension.getRemoteExtension().getTargets().forEach(target -> {
+        this._logger.log("Deploying " + target.getName());
+       
+        deployExtension.getArtifactExtension().getArtifacts().forEach(artifact -> {
+          try {
+            deploy.deploy(target, artifact);
           } catch (Exception e) {
             this._logger.error(e.getMessage());
           }
-
         });
       });
     });

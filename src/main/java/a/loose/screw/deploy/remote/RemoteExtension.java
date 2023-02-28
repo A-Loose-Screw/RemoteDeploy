@@ -13,7 +13,6 @@ public class RemoteExtension extends DefaultNamedDomainObjectSet<Target> {
   private RDLogger _logger;
 
   public RemoteExtension(Project project) {
-    // super(Target, DirectInstantiator.INSTANCE);
     super(Target.class, DirectInstantiator.INSTANCE, null);
     this._project = project;
     this._logger = RDLoggerFactory.getInstance().create("Remotes");

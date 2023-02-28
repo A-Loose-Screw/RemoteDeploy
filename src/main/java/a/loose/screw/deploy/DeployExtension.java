@@ -13,7 +13,7 @@ import a.loose.screw.logging.RDLoggerFactory;
 public class DeployExtension {
   // private Target _target;
   private RemoteExtension _targets;
-  private ArtifactExtension _artifactExtension;
+  private ArtifactExtension _artifacts;
   private Project _project;
   private RDLogger _logger;
 
@@ -24,10 +24,14 @@ public class DeployExtension {
 
     // Extensions
     this._targets = ((ExtensionAware)this).getExtensions().create("remotes", RemoteExtension.class, project);
-    this._artifactExtension = ((ExtensionAware)this).getExtensions().create("artifacts", ArtifactExtension.class, project);
+    this._artifacts = ((ExtensionAware)this).getExtensions().create("artifacts", ArtifactExtension.class, project);
   }
 
   public RemoteExtension getRemoteExtension() {
     return this._targets;
+  }
+
+  public ArtifactExtension getArtifactExtension() {
+    return this._artifacts;
   }
 }
